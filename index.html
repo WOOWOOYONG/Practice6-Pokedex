@@ -4,12 +4,46 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pokedex</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../style.css" />
   </head>
   <body>
     <h1>PokeDex</h1>
-    <div id="poke_container" class="poke-container"></div>
+    <nav>
+      <div class="home">
+        <a href="/index.html">Home</a>
+      </div>
+      <div class="region">
+        <div>
+          <button type="button" class="kanto btn" pokenum="151">關都</button>
+        </div>
+        <div>
+          <button type="button" class="Johto btn" pokenum="251">城都</button>
+        </div>
+        <div>
+          <button type="button" class="hoenn btn" pokenum="386">豐緣</button>
+        </div>
+        <div>
+          <button type="button" class="sinnoh btn" pokenum="493">神奧</button>
+        </div>
+        <div>
+          <button type="button" class="unova btn" pokenum="649">合眾</button>
+        </div>
+        <div>
+          <button type="button" class="kalos btn" pokenum="721">卡洛斯</button>
+        </div>
+        <div>
+          <button type="button" class="alola btn" pokenum="809">阿羅拉</button>
+        </div>
+        <div>
+          <button type="button" class="galar btn" pokenum="905">伽勒爾</button>
+        </div>
+      </div>
+    </nav>
 
-    <script src="app.js"></script>
+    <div id="poke_container" class="poke-container">
+      <h1>POKEMON GETTO DAZE!!</h1>
+    </div>
+
+    <script src="../app.js"></script>
   </body>
 </html>
