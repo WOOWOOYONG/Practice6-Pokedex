@@ -26,6 +26,7 @@ h1{
 }
 
 
+
 .entrance a{
     text-decoration: none;
     color: rgb(14, 11, 85);
@@ -35,6 +36,14 @@ h1{
 .entrance a:hover{
     background-color: rgb(117, 105, 91);
     color: white;
+
+}
+
+.homeimg{
+    margin-top: 3rem;
+    border-radius: 10px;
+    align-items: center;
+    max-width: 25%;
 
 }
 
