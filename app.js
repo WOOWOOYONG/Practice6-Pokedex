@@ -8,8 +8,6 @@ const ka = document.querySelector(".kalos");
 const a = document.querySelector(".alola");
 const g = document.querySelector(".galar");
 
-// const pokemons_number = 9;
-
 k.addEventListener("click", (e) => {
   poke_container.innerHTML = "";
   let pokemons_number = e.target.attributes[2].value;
