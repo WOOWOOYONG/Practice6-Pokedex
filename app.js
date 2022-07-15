@@ -7,8 +7,14 @@ const u = document.querySelector(".unova");
 const ka = document.querySelector(".kalos");
 const a = document.querySelector(".alola");
 const g = document.querySelector(".galar");
+const toggleButton = document.querySelector(".toggle-button");
+const navbarbuttons = document.querySelector(".topnav");
+toggleButton.addEventListener("click", () => {
+  navbarbuttons.classList.toggle("active");
+});
 
 k.addEventListener("click", (e) => {
+  navbarbuttons.classList.remove("active");
   poke_container.innerHTML = "";
   let pokemons_number = e.target.attributes[2].value;
   const fetchPokemons = async () => {
@@ -48,6 +54,7 @@ k.addEventListener("click", (e) => {
 });
 
 j.addEventListener("click", (e) => {
+  navbarbuttons.classList.remove("active");
   poke_container.innerHTML = "";
   let pokemons_number = e.target.attributes[2].value;
   const fetchPokemons = async () => {
@@ -87,6 +94,7 @@ j.addEventListener("click", (e) => {
 });
 
 h.addEventListener("click", (e) => {
+  navbarbuttons.classList.remove("active");
   poke_container.innerHTML = "";
   let pokemons_number = e.target.attributes[2].value;
   const fetchPokemons = async () => {
@@ -126,6 +134,7 @@ h.addEventListener("click", (e) => {
 });
 
 s.addEventListener("click", (e) => {
+  navbarbuttons.classList.remove("active");
   poke_container.innerHTML = "";
   let pokemons_number = e.target.attributes[2].value;
   const fetchPokemons = async () => {
@@ -165,6 +174,7 @@ s.addEventListener("click", (e) => {
 });
 
 u.addEventListener("click", (e) => {
+  navbarbuttons.classList.remove("active");
   poke_container.innerHTML = "";
   let pokemons_number = e.target.attributes[2].value;
   const fetchPokemons = async () => {
@@ -204,6 +214,7 @@ u.addEventListener("click", (e) => {
 });
 
 ka.addEventListener("click", (e) => {
+  navbarbuttons.classList.remove("active");
   poke_container.innerHTML = "";
   let pokemons_number = e.target.attributes[2].value;
   const fetchPokemons = async () => {
@@ -243,6 +254,7 @@ ka.addEventListener("click", (e) => {
 });
 
 a.addEventListener("click", (e) => {
+  navbarbuttons.classList.remove("active");
   poke_container.innerHTML = "";
   let pokemons_number = e.target.attributes[2].value;
   const fetchPokemons = async () => {
@@ -282,6 +294,7 @@ a.addEventListener("click", (e) => {
 });
 
 g.addEventListener("click", (e) => {
+  navbarbuttons.classList.remove("active");
   poke_container.innerHTML = "";
   let pokemons_number = e.target.attributes[2].value;
   const fetchPokemons = async () => {

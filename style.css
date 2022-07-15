@@ -1,8 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Anek+Latin&family=Montserrat&family=Roboto+Slab&family=Staatliches&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap');
 
+
 *{
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 body{
@@ -17,19 +21,28 @@ body{
 }
 
 h1{
-    letter-spacing: 3px;
+    font-size: 3rem;
+    letter-spacing: 2px;
 }
+
 
 .entrance{
     margin-top: 4rem;
     font-size: 2rem;
+    white-space: nowrap;
+    max-width: 100%;
+    animation: fade-in 1s;
 }
 
+@keyframes fade-in{
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
 
 
 .entrance a{
     text-decoration: none;
-    color: rgb(14, 11, 85);
+    color: rgb(58, 58, 58);
     font-weight:600 ;
 }
 
@@ -41,10 +54,14 @@ h1{
 
 .homeimg{
     margin-top: 3rem;
+    align-items: center;
+    max-width: 30%;
+}
+
+.homeimg img{
     border-radius: 10px;
     align-items: center;
-    max-width: 25%;
-
+    max-width: 100%;
 }
 
 .homepage{
@@ -52,6 +69,8 @@ h1{
     margin-right: 1.5rem;
     color: black;
 }
+
+/*Pokemon Page*/
 
 .poke-container{
     display: flex;
@@ -100,55 +119,160 @@ h1{
     letter-spacing: 1px;
 }
 
-nav {
-    max-width: 100%;
+
+/*navbar*/
+
+nav{
+    width: 100%;
+    background-color: rgb(202, 191, 178);
+    margin-bottom: 2rem;
     display: flex;
-    align-items: center;
-    justify-content: space-around;
+    align-items: flex-start;
 }
 
-.home {
+
+.title{
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-left: 1.5rem;
+    padding-top: 1.3rem;
+    
+}
+
+
+.topnav {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    overflow: hidden;
+    justify-content: center;
+}
+
+.topnav a{
+    font-weight: bold;
+}
+
+
+.topnav li{
+    display: inline-block;
+    line-height: 80px;
+    margin: 0 5px;
+}
+
+
+
+.topnav button{
+    padding: 14px 16px;
+}
+
+.hometext {
     background-color: rgb(236, 238, 190, 60%);
-    margin:0;
+    text-align: center;
+    margin-top:1rem;
     padding: 0;
-    margin-right: 1.5rem;
-    border: none;
     color: inherit;
     text-decoration: none;
-    font-size: 1.5rem;
+    font-size: 2rem;
     display: block;
 }
 
-
-
-.navbar li{
-    margin: 5px;
-}
-
-.navbar li:hover{
-   background-color: rgb(117, 105, 91);
-   color: white;
-}
-
-.region {
-    display: flex;
-}
-
-.region div{
-    padding: 1rem;
-}
-
 .btn{
-    background-color: rgb(236, 238, 190, 60%);
     font-size: 1.5rem;
     font-family: 'Noto Sans TC', sans-serif;
     border-radius: 10%;
     border: none;
-
+    background-color: rgb(202, 191, 178);
 }
 
 .btn:hover {
     cursor: pointer;
     background-color: rgb(106, 94, 80);
     color: white;
+    transition: .5s;
+}
+
+.toggle-button{
+    position: absolute;
+    top: .75rem;
+    right: 1rem;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+}
+
+.toggle-button .bar{
+    height: 3px;
+    width: 100%;
+    background-color: black;
+    border-radius: 10px;
+}
+
+
+#check{
+    display: none;
+}
+
+
+@media (max-width: 900px){
+    .homeimg {
+        max-width: 70%;
+    }
+
+    .entrance {
+        margin-top: 4rem;
+        font-size: 1.8rem;
+        white-space: nowrap;
+        max-width: 100%;
+    }
+
+
+
+
+    .btn{
+        font-size: 1.5rem;
+        font-family: 'Noto Sans TC', sans-serif;
+        border-radius: 10%;
+        border: none;
+        background-color: rgb(177, 174, 156);
+    }
+
+    .title{
+        padding-top: 0;
+    }
+
+    .toggle-button{
+        display: flex;
+    }
+
+    .topnav {
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background-color: rgb(177, 174, 156);
+        top: 2.2rem;
+        text-align: center;
+        left: -100%;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .topnav h1{
+        margin-bottom: 10rem;
+    }
+
+
+    .topnav a{
+        padding-left: 1rem;
+
+    }
+    
+    .topnav.active{
+        left: 0;
+        transition: .5s;
+    }
+
+
 }
