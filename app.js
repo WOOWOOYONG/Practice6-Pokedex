@@ -18,16 +18,20 @@ k.addEventListener("click", (e) => {
   poke_container.innerHTML = "";
   let pokemons_number = e.target.attributes[2].value;
   const fetchPokemons = async () => {
+    const pokemons = [];
     for (let i = 1; i <= pokemons_number; i++) {
-      await getPokemon(i);
+      const pokemon = await getPokemon(i);
+      pokemons[i] = pokemon;
+    }
+
+    for (let i = 1; i <= pokemons_number; i++) {
+      createPokemonCard(pokemons[i]);
     }
   };
   const getPokemon = async (id) => {
     const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
     const res = await fetch(url);
-    const pokemon = await res.json();
-    console.log(pokemon);
-    createPokemonCard(pokemon);
+    return await res.json();
   };
 
   const createPokemonCard = (pokemon) => {
