@@ -1,33 +1,38 @@
 const poke_container = document.getElementById("poke_container");
-const k = document.querySelector(".kanto");
-const j = document.querySelector(".Johto");
-const h = document.querySelector(".hoenn");
-const s = document.querySelector(".sinnoh");
-const u = document.querySelector(".unova");
-const ka = document.querySelector(".kalos");
-const a = document.querySelector(".alola");
-const g = document.querySelector(".galar");
+const kanto = document.querySelector(".kanto");
+const johto = document.querySelector(".Johto");
+const hoenn = document.querySelector(".hoenn");
+const sinnoh = document.querySelector(".sinnoh");
+const unova = document.querySelector(".unova");
+const kalos = document.querySelector(".kalos");
+const alola = document.querySelector(".alola");
+const galar = document.querySelector(".galar");
 const toggleButton = document.querySelector(".toggle-button");
 const navbarbuttons = document.querySelector(".topnav");
 toggleButton.addEventListener("click", () => {
   navbarbuttons.classList.toggle("active");
 });
 
-k.addEventListener("click", (e) => {
+kanto.addEventListener("click", (e) => {
   navbarbuttons.classList.remove("active");
   poke_container.innerHTML = "";
   let pokemons_number = e.target.attributes[2].value;
   const fetchPokemons = async () => {
+    const pokemons = [];
     for (let i = 1; i <= pokemons_number; i++) {
-      await getPokemon(i);
+      const pokemon = await getPokemon(i);
+      pokemons[i] = pokemon;
+    }
+
+    for (let i = 1; i <= pokemons_number; i++) {
+      createPokemonCard(pokemons[i]);
     }
   };
+
   const getPokemon = async (id) => {
     const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
     const res = await fetch(url);
-    const pokemon = await res.json();
-    console.log(pokemon);
-    createPokemonCard(pokemon);
+    return await res.json();
   };
 
   const createPokemonCard = (pokemon) => {
@@ -53,21 +58,26 @@ k.addEventListener("click", (e) => {
   fetchPokemons();
 });
 
-j.addEventListener("click", (e) => {
+johto.addEventListener("click", (e) => {
   navbarbuttons.classList.remove("active");
   poke_container.innerHTML = "";
   let pokemons_number = e.target.attributes[2].value;
   const fetchPokemons = async () => {
+    const pokemons = [];
     for (let i = 152; i <= pokemons_number; i++) {
-      await getPokemon(i);
+      const pokemon = await getPokemon(i);
+      pokemons[i] = pokemon;
+    }
+
+    for (let i = 152; i <= pokemons_number; i++) {
+      createPokemonCard(pokemons[i]);
     }
   };
+
   const getPokemon = async (id) => {
     const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
     const res = await fetch(url);
-    const pokemon = await res.json();
-    console.log(pokemon);
-    createPokemonCard(pokemon);
+    return await res.json();
   };
 
   const createPokemonCard = (pokemon) => {
@@ -93,21 +103,26 @@ j.addEventListener("click", (e) => {
   fetchPokemons();
 });
 
-h.addEventListener("click", (e) => {
+hoenn.addEventListener("click", (e) => {
   navbarbuttons.classList.remove("active");
   poke_container.innerHTML = "";
   let pokemons_number = e.target.attributes[2].value;
   const fetchPokemons = async () => {
+    const pokemons = [];
     for (let i = 252; i <= pokemons_number; i++) {
-      await getPokemon(i);
+      const pokemon = await getPokemon(i);
+      pokemons[i] = pokemon;
+    }
+
+    for (let i = 252; i <= pokemons_number; i++) {
+      createPokemonCard(pokemons[i]);
     }
   };
+
   const getPokemon = async (id) => {
     const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
     const res = await fetch(url);
-    const pokemon = await res.json();
-    console.log(pokemon);
-    createPokemonCard(pokemon);
+    return await res.json();
   };
 
   const createPokemonCard = (pokemon) => {
@@ -133,21 +148,26 @@ h.addEventListener("click", (e) => {
   fetchPokemons();
 });
 
-s.addEventListener("click", (e) => {
+sinnoh.addEventListener("click", (e) => {
   navbarbuttons.classList.remove("active");
   poke_container.innerHTML = "";
   let pokemons_number = e.target.attributes[2].value;
   const fetchPokemons = async () => {
+    const pokemons = [];
     for (let i = 387; i <= pokemons_number; i++) {
-      await getPokemon(i);
+      const pokemon = await getPokemon(i);
+      pokemons[i] = pokemon;
+    }
+
+    for (let i = 387; i <= pokemons_number; i++) {
+      createPokemonCard(pokemons[i]);
     }
   };
+
   const getPokemon = async (id) => {
     const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
     const res = await fetch(url);
-    const pokemon = await res.json();
-    console.log(pokemon);
-    createPokemonCard(pokemon);
+    return await res.json();
   };
 
   const createPokemonCard = (pokemon) => {
@@ -173,21 +193,26 @@ s.addEventListener("click", (e) => {
   fetchPokemons();
 });
 
-u.addEventListener("click", (e) => {
+unova.addEventListener("click", (e) => {
   navbarbuttons.classList.remove("active");
   poke_container.innerHTML = "";
   let pokemons_number = e.target.attributes[2].value;
   const fetchPokemons = async () => {
+    const pokemons = [];
     for (let i = 494; i <= pokemons_number; i++) {
-      await getPokemon(i);
+      const pokemon = await getPokemon(i);
+      pokemons[i] = pokemon;
+    }
+
+    for (let i = 494; i <= pokemons_number; i++) {
+      createPokemonCard(pokemons[i]);
     }
   };
+
   const getPokemon = async (id) => {
     const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
     const res = await fetch(url);
-    const pokemon = await res.json();
-    console.log(pokemon);
-    createPokemonCard(pokemon);
+    return await res.json();
   };
 
   const createPokemonCard = (pokemon) => {
@@ -213,23 +238,27 @@ u.addEventListener("click", (e) => {
   fetchPokemons();
 });
 
-ka.addEventListener("click", (e) => {
+kalos.addEventListener("click", (e) => {
   navbarbuttons.classList.remove("active");
   poke_container.innerHTML = "";
   let pokemons_number = e.target.attributes[2].value;
   const fetchPokemons = async () => {
+    const pokemons = [];
     for (let i = 650; i <= pokemons_number; i++) {
-      await getPokemon(i);
+      const pokemon = await getPokemon(i);
+      pokemons[i] = pokemon;
+    }
+
+    for (let i = 650; i <= pokemons_number; i++) {
+      createPokemonCard(pokemons[i]);
     }
   };
+
   const getPokemon = async (id) => {
     const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
     const res = await fetch(url);
-    const pokemon = await res.json();
-    console.log(pokemon);
-    createPokemonCard(pokemon);
+    return await res.json();
   };
-
   const createPokemonCard = (pokemon) => {
     const pokemonEl = document.createElement("div");
     pokemonEl.classList.add("pokemon");
@@ -253,21 +282,26 @@ ka.addEventListener("click", (e) => {
   fetchPokemons();
 });
 
-a.addEventListener("click", (e) => {
+alola.addEventListener("click", (e) => {
   navbarbuttons.classList.remove("active");
   poke_container.innerHTML = "";
   let pokemons_number = e.target.attributes[2].value;
   const fetchPokemons = async () => {
+    const pokemons = [];
     for (let i = 722; i <= pokemons_number; i++) {
-      await getPokemon(i);
+      const pokemon = await getPokemon(i);
+      pokemons[i] = pokemon;
+    }
+
+    for (let i = 722; i <= pokemons_number; i++) {
+      createPokemonCard(pokemons[i]);
     }
   };
+
   const getPokemon = async (id) => {
     const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
     const res = await fetch(url);
-    const pokemon = await res.json();
-    console.log(pokemon);
-    createPokemonCard(pokemon);
+    return await res.json();
   };
 
   const createPokemonCard = (pokemon) => {
@@ -293,21 +327,26 @@ a.addEventListener("click", (e) => {
   fetchPokemons();
 });
 
-g.addEventListener("click", (e) => {
+galar.addEventListener("click", (e) => {
   navbarbuttons.classList.remove("active");
   poke_container.innerHTML = "";
   let pokemons_number = e.target.attributes[2].value;
   const fetchPokemons = async () => {
+    const pokemons = [];
     for (let i = 810; i <= pokemons_number; i++) {
-      await getPokemon(i);
+      const pokemon = await getPokemon(i);
+      pokemons[i] = pokemon;
+    }
+
+    for (let i = 810; i <= pokemons_number; i++) {
+      createPokemonCard(pokemons[i]);
     }
   };
+
   const getPokemon = async (id) => {
     const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
     const res = await fetch(url);
-    const pokemon = await res.json();
-    console.log(pokemon);
-    createPokemonCard(pokemon);
+    return await res.json();
   };
 
   const createPokemonCard = (pokemon) => {
