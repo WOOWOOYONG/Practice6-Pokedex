@@ -164,6 +164,7 @@ nav{
     background-color: rgb(106, 94, 80);
     color: white;
     transition: .5s;
+    padding: 0.5rem;
 }
 
 
