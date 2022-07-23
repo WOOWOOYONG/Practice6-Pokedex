@@ -127,10 +127,14 @@ h1{
 
 nav{
     width: 100%;
-    background-color: rgb(202, 191, 178);
+    background-color: rgb(202, 191, 178, 80%);
     margin-bottom: 2rem;
     display: flex;
     align-items: flex-start;
+    position: sticky;
+    top:0;
+    z-index: 9999;
+    transition: all 300ms ease-in-out;
 }
 
 
@@ -204,7 +208,7 @@ nav{
     font-family: 'Noto Sans TC', sans-serif;
     border-radius: 10%;
     border: none;
-    background-color: rgb(202, 191, 178);
+    background-color: rgb(202, 191, 178, 20%);
     color: black;
 }
 
@@ -237,6 +241,18 @@ nav{
 #check{
     display: none;
 }
+
+
+/*navbar scroll*/
+.scroll-down nav {
+    transform: translate3d(0, -100%, 0);
+}
+
+.scroll-up nav {
+    filter: drop-shadow(0 -10px 20px  rgb(170, 170, 170));
+    
+}
+
 
 
 /*Loading animation*/

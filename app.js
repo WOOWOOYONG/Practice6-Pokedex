@@ -1,15 +1,8 @@
 const poke_container = document.getElementById("poke_container");
-const kanto = document.querySelector(".kanto");
-const johto = document.querySelector(".Johto");
-const hoenn = document.querySelector(".hoenn");
-const sinnoh = document.querySelector(".sinnoh");
-const unova = document.querySelector(".unova");
-const kalos = document.querySelector(".kalos");
-const alola = document.querySelector(".alola");
-const galar = document.querySelector(".galar");
 const toggleButton = document.querySelector(".toggle-button");
 const navbarbuttons = document.querySelector(".topnav");
 const loading = document.getElementById("loading");
+const body = document.body;
 
 // 取得資料
 const getPokemon = async (id) => {
@@ -74,4 +67,24 @@ navbarbuttons.addEventListener("click", (e) => {
 // hamburger menu
 toggleButton.addEventListener("click", (e) => {
   navbarbuttons.classList.toggle("active");
+});
+
+//navbar scroll
+let lastScroll = 0;
+
+window.addEventListener("scroll", () => {
+  const currentScroll = window.pageYOffset;
+  if (currentScroll <= 0) {
+    body.classList.remove("scroll-up");
+  }
+  if (currentScroll > lastScroll && !body.classList.contains("scroll-down")) {
+    body.classList.remove("scroll-up");
+    body.classList.add("scroll-down");
+  }
+  if (currentScroll < lastScroll && body.classList.contains("scroll-down")) {
+    body.classList.remove("scroll-down");
+    body.classList.add("scroll-up");
+  }
+
+  lastScroll = currentScroll;
 });
