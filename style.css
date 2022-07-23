@@ -20,6 +20,8 @@ body{
     margin: 0;
 }
 
+
+
 h1{
     font-size: 3rem;
     letter-spacing: 2px;
@@ -235,6 +237,41 @@ nav{
 #check{
     display: none;
 }
+
+
+/*Loading animation*/
+
+.loading{
+    display: flex;
+}
+
+.circle{
+    background-color: #f2e9e4;
+    border-radius: 50%;
+    margin: 3px;
+    height: 10px;
+    width: 10px;
+    animation: jump 0.5s ease-in infinite;
+}
+
+.circle:nth-of-type(2){
+    animation-delay: 0.1s;
+
+}
+
+.circle:nth-of-type(3){
+    animation-delay: 0.2s;
+}
+
+@keyframes jump{
+    0% {
+        transform: translateY(0);
+    }
+    50%{
+        transform: translateY(-10px);
+    }
+}
+
 
 
 @media (max-width: 900px){

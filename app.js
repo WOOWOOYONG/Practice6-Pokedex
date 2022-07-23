@@ -9,6 +9,7 @@ const alola = document.querySelector(".alola");
 const galar = document.querySelector(".galar");
 const toggleButton = document.querySelector(".toggle-button");
 const navbarbuttons = document.querySelector(".topnav");
+const loading = document.getElementById("loading");
 
 // 取得資料
 const getPokemon = async (id) => {
@@ -36,6 +37,7 @@ const createPokemonCard = (pokemon) => {
   </div>
 `;
   pokemonEl.innerHTML = pokeInnerHTML;
+  loading.innerHTML = "";
   poke_container.appendChild(pokemonEl);
 };
 
@@ -49,8 +51,9 @@ navbarbuttons.addEventListener("click", (e) => {
   if (!e.target.classList.contains("btn")) {
     return;
   }
-  navbarbuttons.classList.remove("active");
   poke_container.innerHTML = "";
+  loading.innerHTML = `<div class ='loading'><div class='circle'></div><div class='circle'></div><div class='circle'></div>`;
+  navbarbuttons.classList.remove("active");
 
   let pokemons_number_start = parseInt(e.target.dataset["pokenumStart"], 10);
   let pokemons_number_end = parseInt(e.target.dataset["pokenumEnd"], 10);
@@ -60,16 +63,15 @@ navbarbuttons.addEventListener("click", (e) => {
     for (let i = pokemons_number_start; i <= pokemons_number_end; i++) {
       range.push(getPokemon(i));
     }
-    //promise all 寫法
+    //promise all
     (await Promise.all(range)).map((pokemon) => {
       createPokemonCard(pokemon);
     });
-    console.log(range);
   };
   fetchPokemons();
 });
 
-// 選擇地
+// hamburger menu
 toggleButton.addEventListener("click", (e) => {
   navbarbuttons.classList.toggle("active");
 });
