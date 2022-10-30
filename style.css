@@ -343,23 +343,22 @@ footer {
 
 
 @media (max-width: 900px){
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
     .homeimg {
         max-width: 70%;
     }
 
     .entrance {
         margin-top: 4rem;
-        font-size: 1.8rem;
+        font-size: 1.4rem;
         white-space: nowrap;
         max-width: 100%;
     }
     
-    .hometext {
-        font-size: 1.4rem;
-    }
-
-
-
     .btn{
         font-size: 1.5rem;
         font-family: 'Noto Sans TC', sans-serif;
@@ -389,8 +388,6 @@ footer {
         align-items: center;
         padding: 0
     }
-
-
 
     .btn-home{
         padding: 0;
