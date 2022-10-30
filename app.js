@@ -3,6 +3,29 @@ const toggleButton = document.querySelector(".toggle-button");
 const navbarbuttons = document.querySelector(".topnav");
 const loading = document.getElementById("loading");
 const body = document.body;
+const card = document.querySelectorAll(".card");
+
+const typeColor = {
+  bug: "#7fab6c",
+  dragon: "#25398f",
+  electric: "#fed330",
+  fairy: "#ff0069",
+  fighting: "#30336b",
+  fire: "#f0932b",
+  flying: "81ecec",
+  grass: "#00b894",
+  ground: "#efb549",
+  ghost: "#a55eea",
+  ice: "#aac8e6",
+  normal: "#95afc0",
+  poison: "#6c5ce7",
+  psychic: "#a29bfe",
+  rock: "#b09e6b",
+  water: "#0190ff",
+  dark: "#525151",
+  steel: "#aba9a1",
+  flying: "#90c8d1",
+};
 
 // 取得資料
 const getPokemon = async (id) => {
@@ -13,22 +36,45 @@ const getPokemon = async (id) => {
 
 // 建立pokemon卡片
 const createPokemonCard = (pokemon) => {
-  const { id, name, sprites, types } = pokemon;
+  const { id, stats, name, sprites, types } = pokemon;
 
   const pokemonEl = document.createElement("div");
-  pokemonEl.classList.add("pokemon");
-
+  const hp = stats[0].base_stat;
   const type = types[0].type.name;
+  const statAttack = stats[1].base_stat;
+  const statDefense = stats[2].base_stat;
+  const statSpeed = stats[5].base_stat;
+
+  // 依屬性設定背景色
+  const themeColor = typeColor[type];
+
   const pokeInnerHTML = `
-  <div class="img-container">
-    <img src="${sprites.front_default}" alt="${name}" />
-    </div>
-    <div class="info>
-    <span class="number">${id}</span>
-    <h3 class="name">${name}</h3>
-    <small class="type">Type: <span>${type}</span></small>
+  <div class="container">
+  <div class='card' style= "background: radial-gradient(circle at 50% 0%,${themeColor} 36%, #f0efe9 36%)">
+  <span class="number">${id}</span>
+  <p class='hp'><span>HP</span> ${hp}</p>
+  <img src="${sprites.front_default}" alt="${name}" />
+  <h2 class='name'>${name}</h2>
+  <div class='types'>
+  <span style="background:${themeColor}">${type}</span>
   </div>
-`;
+  <div class="stats">
+  <div>
+  <h3>${statAttack}</h3>
+  <p>Attack</p>
+  </div>
+  <div>
+  <h3>${statDefense}</h3>
+  <p>Defense</p>
+  </div>
+  <div>
+  <h3>${statSpeed}</h3>
+  <p>Speed</p>
+  </div>
+  </div>
+  </div>
+  `;
+
   pokemonEl.innerHTML = pokeInnerHTML;
   loading.innerHTML = "";
   poke_container.appendChild(pokemonEl);
