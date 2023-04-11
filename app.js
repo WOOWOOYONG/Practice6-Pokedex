@@ -1,52 +1,56 @@
-const poke_container = document.getElementById("poke_container");
-const toggleButton = document.querySelector(".toggle-button");
-const navbarbuttons = document.querySelector(".topnav");
-const loading = document.getElementById("loading");
-const body = document.body;
-const card = document.querySelectorAll(".card");
+const pokeContainer = document.getElementById('poke_container')
+const toggleButton = document.querySelector('.toggle-button')
+const navbarbuttons = document.querySelector('.topnav')
+const loading = document.getElementById('loading')
+const body = document.body
 
 const typeColor = {
-  bug: "#7fab6c",
-  dragon: "#25398f",
-  electric: "#fed330",
-  fairy: "#ff0069",
-  fighting: "#30336b",
-  fire: "#f0932b",
-  flying: "81ecec",
-  grass: "#00b894",
-  ground: "#efb549",
-  ghost: "#a55eea",
-  ice: "#aac8e6",
-  normal: "#95afc0",
-  poison: "#6c5ce7",
-  psychic: "#a29bfe",
-  rock: "#b09e6b",
-  water: "#0190ff",
-  dark: "#525151",
-  steel: "#aba9a1",
-  flying: "#90c8d1",
-};
+  bug: '#7fab6c',
+  dragon: '#25398f',
+  electric: '#fed330',
+  fairy: '#ff0069',
+  fighting: '#30336b',
+  fire: '#f0932b',
+  flying: '#7ccdea',
+  grass: '#00b894',
+  ground: '#efb549',
+  ghost: '#a55eea',
+  ice: '#aac8e6',
+  normal: '#95afc0',
+  poison: '#6c5ce7',
+  psychic: '#a29bfe',
+  rock: '#b09e6b',
+  water: '#0190ff',
+  dark: '#525151',
+  steel: '#aba9a1'
+}
 
 // 取得資料
 const getPokemon = async (id) => {
-  const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
-  const res = await fetch(url);
-  return await res.json();
-};
+  const url = `https://pokeapi.co/api/v2/pokemon/${id}`
+  const res = await fetch(url)
+  return await res.json()
+}
 
 // 建立pokemon卡片
 const createPokemonCard = (pokemon) => {
-  const { id, stats, name, sprites, types } = pokemon;
-
-  const pokemonEl = document.createElement("div");
-  const hp = stats[0].base_stat;
-  const type = types[0].type.name;
-  const statAttack = stats[1].base_stat;
-  const statDefense = stats[2].base_stat;
-  const statSpeed = stats[5].base_stat;
+  const { id, stats, name, sprites, types } = pokemon
+  const pokemonEl = document.createElement('div')
+  const hp = stats[0].base_stat
+  const statAttack = stats[1].base_stat
+  const statDefense = stats[2].base_stat
+  const statSpeed = stats[5].base_stat
+  const typesHTML = types
+    .map(
+      (type) =>
+        `<span style="background:${typeColor[type.type.name]}">${
+          type.type.name
+        }</span>`
+    )
+    .join('')
 
   // 依屬性設定背景色
-  const themeColor = typeColor[type];
+  const themeColor = typeColor[types[0].type.name]
 
   const pokeInnerHTML = `
   <div class="container">
@@ -56,7 +60,7 @@ const createPokemonCard = (pokemon) => {
   <img src="${sprites.front_default}" alt="${name}" />
   <h2 class='name'>${name}</h2>
   <div class='types'>
-  <span style="background:${themeColor}">${type}</span>
+    ${typesHTML}
   </div>
   <div class="stats">
   <div>
@@ -73,64 +77,65 @@ const createPokemonCard = (pokemon) => {
   </div>
   </div>
   </div>
-  `;
+  `
 
-  pokemonEl.innerHTML = pokeInnerHTML;
-  loading.innerHTML = "";
-  poke_container.appendChild(pokemonEl);
-};
+  pokemonEl.innerHTML = pokeInnerHTML
+  loading.innerHTML = ''
+  pokeContainer.appendChild(pokemonEl)
+}
 
 // 根據id取得各地區的pokemon資料集
-navbarbuttons.addEventListener("click", (e) => {
-  e.target.disabled = true;
+navbarbuttons.addEventListener('click', (e) => {
+  e.target.disabled = true
   setTimeout(() => {
-    e.target.disabled = false;
-  }, 1000);
+    e.target.disabled = false
+  }, 1000)
 
-  if (!e.target.classList.contains("btn")) {
-    return;
+  if (!e.target.classList.contains('btn')) {
+    return
   }
-  poke_container.innerHTML = "";
-  loading.innerHTML = `<div class ='loading'><div class='circle'></div><div class='circle'></div><div class='circle'></div>`;
-  navbarbuttons.classList.remove("active");
+  pokeContainer.innerHTML = ''
+  loading.innerHTML =
+    "<div class ='loading'><div class='circle'></div><div class='circle'></div><div class='circle'></div>"
+  navbarbuttons.classList.remove('active')
 
-  let pokemons_number_start = parseInt(e.target.dataset["pokenumStart"], 10);
-  let pokemons_number_end = parseInt(e.target.dataset["pokenumEnd"], 10);
+  const pokenumStart = parseInt(e.target.dataset.pokenumStart, 10)
+  const pokenumEnd = parseInt(e.target.dataset.pokenumEnd, 10)
   const fetchPokemons = async () => {
-    const range = [];
+    const range = []
 
-    for (let i = pokemons_number_start; i <= pokemons_number_end; i++) {
-      range.push(getPokemon(i));
+    for (let i = pokenumStart; i <= pokenumEnd; i++) {
+      range.push(getPokemon(i))
     }
-    //promise all
-    (await Promise.all(range)).map((pokemon) => {
-      createPokemonCard(pokemon);
-    });
-  };
-  fetchPokemons();
-});
+    // promise all
+    ;(await Promise.all(range)).forEach((pokemon) => {
+      createPokemonCard(pokemon)
+    })
+  }
+  fetchPokemons()
+})
 
 // hamburger menu
-toggleButton.addEventListener("click", (e) => {
-  navbarbuttons.classList.toggle("active");
-});
+toggleButton.addEventListener('click', (e) => {
+  navbarbuttons.classList.toggle('active')
+})
 
-//navbar scroll
-let lastScroll = 0;
+// navbar scroll
+let lastScroll = 0
 
-window.addEventListener("scroll", () => {
-  const currentScroll = window.pageYOffset;
+window.addEventListener('scroll', () => {
+  const currentScroll = window.pageYOffset
   if (currentScroll <= 0) {
-    body.classList.remove("scroll-up");
+    body.classList.remove('scroll-up')
   }
-  if (currentScroll > lastScroll && !body.classList.contains("scroll-down")) {
-    body.classList.remove("scroll-up");
-    body.classList.add("scroll-down");
+  if (currentScroll > lastScroll && !body.classList.contains('scroll-down')) {
+    body.classList.remove('scroll-up')
+    body.classList.add('scroll-down')
   }
-  if (currentScroll < lastScroll && body.classList.contains("scroll-down")) {
-    body.classList.remove("scroll-down");
-    body.classList.add("scroll-up");
+  if (currentScroll < lastScroll && body.classList.contains('scroll-down')) {
+    body.classList.remove('scroll-down')
+    body.classList.add('scroll-up')
   }
 
-  lastScroll = currentScroll;
-});
+  lastScroll = currentScroll
+})
