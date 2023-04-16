@@ -27,9 +27,13 @@ const typeColor = {
 
 // 取得資料
 const getPokemon = async (id) => {
-  const url = `https://pokeapi.co/api/v2/pokemon/${id}`
-  const res = await fetch(url)
-  return await res.json()
+  try {
+    const url = `https://pokeapi.co/api/v2/pokemon/${id}`
+    const res = await fetch(url)
+    return await res.json()
+  } catch (err) {
+    console.log(err)
+  }
 }
 
 // 建立pokemon卡片
