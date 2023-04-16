@@ -84,6 +84,24 @@ const createPokemonCard = (pokemon) => {
   pokeContainer.appendChild(pokemonEl)
 }
 
+const fetchPokemons = async (startId, endId) => {
+  const range = []
+  for (let i = startId; i <= endId; i++) {
+    range.push(getPokemon(i))
+  }
+  // promise all 寫法
+  // 把Promise.all得到的陣列用()包起來，做為forEach的參數
+  // ;(await Promise.all(range)).forEach((pokemon) => {
+  //   createPokemonCard(pokemon)
+  // })
+
+  // for...await寫法
+  // 可以等待當前元素的Promise物件解析後再進行下一個元素的處理
+  for await (const pokemon of range) {
+    createPokemonCard(pokemon)
+  }
+}
+
 // 根據id取得各地區的pokemon資料集
 navbarbuttons.addEventListener('click', (e) => {
   e.target.disabled = true
@@ -101,18 +119,7 @@ navbarbuttons.addEventListener('click', (e) => {
 
   const pokenumStart = parseInt(e.target.dataset.pokenumStart, 10)
   const pokenumEnd = parseInt(e.target.dataset.pokenumEnd, 10)
-  const fetchPokemons = async () => {
-    const range = []
-
-    for (let i = pokenumStart; i <= pokenumEnd; i++) {
-      range.push(getPokemon(i))
-    }
-    // promise all
-    ;(await Promise.all(range)).forEach((pokemon) => {
-      createPokemonCard(pokemon)
-    })
-  }
-  fetchPokemons()
+  fetchPokemons(pokenumStart, pokenumEnd)
 })
 
 // hamburger menu
