@@ -103,13 +103,13 @@ var createPokemonCard = function (pokemon) {
         .join('');
     // 依屬性設定背景色
     var themeColor = typeColor[types[0].type.name];
-    var pokeInnerHTML = "\n  <div class=\"container\">\n  <div class='card' style= \"background: radial-gradient(circle at 50% 0%,".concat(themeColor, " 36%, #f0efe9 36%)\">\n  <span class=\"number\">").concat(id, "</span>\n  <p class='hp'><span>HP</span> ").concat(hp, "</p>\n  <img src=\"").concat(sprites.front_default, "\" alt=\"").concat(name, "\" loading=\"lazy\" />\n  <h2 class='name'>").concat(name, "</h2>\n  <div class='types'>\n    ").concat(typesHTML, "\n  </div>\n  <div class=\"stats\">\n  <div>\n  <h3>").concat(statAttack, "</h3>\n  <p>Attack</p>\n  </div>\n  <div>\n  <h3>").concat(statDefense, "</h3>\n  <p>Defense</p>\n  </div>\n  <div>\n  <h3>").concat(statSpeed, "</h3>\n  <p>Speed</p>\n  </div>\n  </div>\n  </div>\n  ");
+    var pokeInnerHTML = "\n  <div class=\"card\">\n  <div class='card-inner' style= \"background: radial-gradient(circle at 50% 0%,".concat(themeColor, " 36%, #f0efe9 36%)\">\n  <span class=\"number\">").concat(id, "</span>\n  <p class='hp'><span>HP</span> ").concat(hp, "</p>\n  <img src=\"").concat(sprites.front_default, "\" alt=\"").concat(name, "\" loading=\"lazy\" />\n  <h2 class='name'>").concat(name, "</h2>\n  <div class='types'>\n    ").concat(typesHTML, "\n  </div>\n  <div class=\"stats\">\n  <div>\n  <h3>").concat(statAttack, "</h3>\n  <p>Attack</p>\n  </div>\n  <div>\n  <h3>").concat(statDefense, "</h3>\n  <p>Defense</p>\n  </div>\n  <div>\n  <h3>").concat(statSpeed, "</h3>\n  <p>Speed</p>\n  </div>\n  </div>\n  </div>\n  ");
     pokemonEl.innerHTML = pokeInnerHTML;
     loading.innerHTML = '';
     pokeContainer.appendChild(pokemonEl);
 };
 var fetchPokemons = function (startId, endId) { return __awaiter(void 0, void 0, void 0, function () {
-    var range, i, _a, range_1, range_1_1, pokemon, e_1_1;
+    var range, i, _a, range_1, range_1_1, pokemon, e_1_1, cards, observer;
     var _b, e_1, _c, _d;
     return __generator(this, function (_e) {
         switch (_e.label) {
@@ -154,7 +154,23 @@ var fetchPokemons = function (startId, endId) { return __awaiter(void 0, void 0,
                 if (e_1) throw e_1.error;
                 return [7 /*endfinally*/];
             case 11: return [7 /*endfinally*/];
-            case 12: return [2 /*return*/];
+            case 12:
+                cards = document.querySelectorAll('.card');
+                observer = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        entry.target.classList.toggle('show', entry.isIntersecting);
+                        if (entry.isIntersecting) {
+                            observer.unobserve(entry.target);
+                        }
+                    }),
+                        {
+                            threshold: 0.5
+                        };
+                });
+                cards.forEach(function (card) {
+                    observer.observe(card);
+                });
+                return [2 /*return*/];
         }
     });
 }); };

@@ -1,10 +1,17 @@
-const pokeContainer = document.getElementById('poke_container')
-const toggleButton = document.querySelector('.toggle-button')
-const navbarbuttons = document.querySelector('.topnav')
-const loading = document.getElementById('loading')
+const pokeContainer = document.getElementById('poke_container') as HTMLDivElement
+const toggleButton = document.querySelector('.toggle-button') as HTMLAnchorElement
+const navbarbuttons = document.querySelector('.topnav') as HTMLUListElement
+const loading = document.getElementById('loading') as HTMLDivElement
 const body = document.body
 
-const typeColor = {
+
+
+
+
+
+
+
+const typeColor: { [key: string]: string } = {
   bug: '#7fab6c',
   dragon: '#25398f',
   electric: '#fed330',
@@ -26,7 +33,7 @@ const typeColor = {
 }
 
 // 取得資料
-const getPokemon = async (id) => {
+const getPokemon = async (id:number) => {
   try {
     const url = `https://pokeapi.co/api/v2/pokemon/${id}`
     const res = await fetch(url)
@@ -36,8 +43,23 @@ const getPokemon = async (id) => {
   }
 }
 
+
+interface Pokemon {
+  [propName: string]: any
+}
+
+type TypeDetail = {
+  name: string
+  url: string
+}
+
+type PokemonType = {
+  slot: number
+  type: TypeDetail
+} 
+
 // 建立pokemon卡片
-const createPokemonCard = (pokemon) => {
+const createPokemonCard = (pokemon:Pokemon) => {
   const { id, stats, name, sprites, types } = pokemon
   const pokemonEl = document.createElement('div')
   const hp = stats[0].base_stat
@@ -46,7 +68,7 @@ const createPokemonCard = (pokemon) => {
   const statSpeed = stats[5].base_stat
   const typesHTML = types
     .map(
-      (type) =>
+      (type: PokemonType) =>
         `<span style="background:${typeColor[type.type.name]}">${
           type.type.name
         }</span>`
@@ -57,11 +79,11 @@ const createPokemonCard = (pokemon) => {
   const themeColor = typeColor[types[0].type.name]
 
   const pokeInnerHTML = `
-  <div class="container">
-  <div class='card' style= "background: radial-gradient(circle at 50% 0%,${themeColor} 36%, #f0efe9 36%)">
+  <div class="card">
+  <div class='card-inner' style= "background: radial-gradient(circle at 50% 0%,${themeColor} 36%, #f0efe9 36%)">
   <span class="number">${id}</span>
   <p class='hp'><span>HP</span> ${hp}</p>
-  <img src="${sprites.front_default}" alt="${name}" />
+  <img src="${sprites.front_default}" alt="${name}" loading="lazy" />
   <h2 class='name'>${name}</h2>
   <div class='types'>
     ${typesHTML}
@@ -88,8 +110,8 @@ const createPokemonCard = (pokemon) => {
   pokeContainer.appendChild(pokemonEl)
 }
 
-const fetchPokemons = async (startId, endId) => {
-  const range = []
+const fetchPokemons = async (startId:number, endId:number) => {
+  const range: Promise<any>[] = []
   for (let i = startId; i <= endId; i++) {
     range.push(getPokemon(i))
   }
@@ -104,16 +126,37 @@ const fetchPokemons = async (startId, endId) => {
   for await (const pokemon of range) {
     createPokemonCard(pokemon)
   }
+
+  // 監測Pokemon卡片，若出現在畫面上就加上show動畫效果
+  const cards = document.querySelectorAll('.card')
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      entry.target.classList.toggle('show', entry.isIntersecting)
+      if (entry.isIntersecting) {
+        observer.unobserve(entry.target)
+      }
+    }),
+      {
+        threshold:0.5
+      }
+  })
+  cards.forEach((card) => {
+    observer.observe(card)
+  })
 }
 
 // 根據id取得各地區的pokemon資料集
 navbarbuttons.addEventListener('click', (e) => {
-  e.target.disabled = true
+    if (!e.target) {
+      return
+    }
+  const btnElement = e.target as HTMLButtonElement
+  btnElement!.disabled = true
   setTimeout(() => {
-    e.target.disabled = false
+    btnElement.disabled = false
   }, 1000)
 
-  if (!e.target.classList.contains('btn')) {
+  if (!btnElement.classList.contains('btn')) {
     return
   }
   pokeContainer.innerHTML = ''
@@ -121,9 +164,11 @@ navbarbuttons.addEventListener('click', (e) => {
     "<div class ='loading'><div class='circle'></div><div class='circle'></div><div class='circle'></div>"
   navbarbuttons.classList.remove('active')
 
-  const pokenumStart = parseInt(e.target.dataset.pokenumStart, 10)
-  const pokenumEnd = parseInt(e.target.dataset.pokenumEnd, 10)
+  if (btnElement.dataset.pokenumStart && btnElement.dataset.pokenumEnd) {
+  const pokenumStart = parseInt(btnElement.dataset.pokenumStart, 10)
+  const pokenumEnd = parseInt(btnElement.dataset.pokenumEnd, 10)
   fetchPokemons(pokenumStart, pokenumEnd)
+} 
 })
 
 // hamburger menu
