@@ -62,6 +62,7 @@ h1 {
 
 .entrance:hover {
   background-color: rgb(117, 105, 91);
+  transition: all 0.3s
 }
 
 .entrance a:hover {
