@@ -62,6 +62,7 @@ h1 {
 
 .entrance:hover {
   background-color: rgb(117, 105, 91);
+  transition: all 0.3s
 }
 
 .entrance a:hover {
@@ -101,7 +102,7 @@ main {
   max-width: 1200px;
 }
 
-.container {
+.card {
   background-color: rgba(249, 237, 221, 0.996);
   border-radius: 20px;
   box-shadow: 0 3px 15px gray;
@@ -109,16 +110,24 @@ main {
   padding: 20px;
   text-align: center;
   width: 300px;
+  transform: translateY(50px);  /* 在Y軸上向下偏移50px */
+  opacity: 0;  /* 完全透明 */
+  transition: all 0.5s ease-out;  /* 設置過渡效果 */
 }
 
-.card {
+.card.show {
+  transform: translateY(0);  /* 恢復到正常位置 */
+  opacity: 1;  /* 完全不透明 */
+}
+
+.card-inner {
   width: 100%;
   padding: 30px 20px;
   box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
 }
 
-.card img {
+.card-inner img {
   display: block;
   width: 150px;
   max-height: 200px;
@@ -302,6 +311,8 @@ footer {
   padding: 1.5rem 0;
   margin-top: auto;
 }
+
+
 
 /*Loading animation*/
 

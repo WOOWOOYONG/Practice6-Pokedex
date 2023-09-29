@@ -16,6 +16,11 @@
 4. 待研究: 雙屬性如何顯示 ＝> 2023/4/12 已修正
 5. 練習加入 ESLint，使用 Standard Style 規範程式碼
 
+2023/9/29更新
+1. 圖片Lazy Loading
+2. 練習改寫成TypeScript
+3. IntersectionObserver練習
+
 ### API 連結
 
 - [POKEAPI](https://pokeapi.co/)
